@@ -105,19 +105,16 @@ function loadProjects() {
     const projects = JSON.parse(localStorage.getItem('portfolio_projects')) || [
         {
             id: 1,
-            title: 'Project',
-            category: 'UI/UX • Flutter',
+            title: 'Ecommerce Redesign',
+            category: 'UI/UX • Web',
             img: 'project1.jpg',
-            description: 'A comprehensive mobile application design focused on user experience and modern interface patterns. This project involved extensive user research, wireframing, and high-fidelity prototyping.',
+            description: 'A complete overhaul of an ecommerce platform to improve user conversion.',
+            problem: 'Users were dropping off at the checkout page due to a complex flow.',
+            solution: 'Simplified the 5-step checkout into a single-page interactive experience.',
+            role: 'Lead UX Designer',
+            tools: 'Figma, Adobe Illustrator',
+            outcome: 'Increased conversion rate by 25% within the first month.',
             gallery: ['project1.jpg', 'project1-detail1.jpg', 'project1-detail2.jpg']
-        },
-        {
-            id: 2,
-            title: 'Branding Showcase',
-            category: 'Graphic Design',
-            img: 'project2.jpg',
-            description: 'Complete brand identity package including logo design, color palette selection, typography, and brand guidelines. Created to establish a strong visual presence.',
-            gallery: ['project2.jpg', 'project2-detail1.jpg', 'project2-detail2.jpg']
         }
     ];
 
@@ -171,31 +168,49 @@ function openModal(projectId) {
     document.querySelector('.modal-category').textContent = project.category;
     document.querySelector('.modal-description').textContent = project.description;
 
+    // Case Study Fields
+    const caseStudyContainer = document.querySelector('.case-study-details');
+    if (project.problem || project.solution || project.role || project.tools || project.outcome) {
+        caseStudyContainer.style.display = 'block';
+        document.getElementById('modal-problem').textContent = project.problem || 'N/A';
+        document.getElementById('modal-solution').textContent = project.solution || 'N/A';
+        document.getElementById('modal-role').textContent = project.role || 'N/A';
+        document.getElementById('modal-tools').textContent = project.tools || 'N/A';
+        document.getElementById('modal-outcome').textContent = project.outcome || 'N/A';
+
+        // Specialized Images
+        const setSpecialImg = (id, src) => {
+            const imgEl = document.getElementById(id);
+            if (src) {
+                imgEl.src = src;
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
+        };
+
+        setSpecialImg('modal-problem-img', project.problemImg);
+        setSpecialImg('modal-solution-img', project.solutionImg);
+        setSpecialImg('modal-outcome-img', project.outcomeImg);
+
+    } else {
+        caseStudyContainer.style.display = 'none';
+    }
+
     // Generate Gallery
     const galleryContainer = document.getElementById('modal-gallery');
+    const galleryImages = project.gallery || [];
 
-    // Create placeholders if images don't exist effectively
-    const galleryImages = project.gallery || [project.img, project.img, project.img];
-
-    galleryContainer.innerHTML = galleryImages.map((img, index) => {
-        // Use placeholder generator for demo purposes if image is generic
-        let imgSrc = img;
-        if (img.includes('project') || img.includes('detail')) {
-            const gradients = [
-                ['#4338ca', '#06b6d4'],
-                ['#7c3aed', '#ec4899'],
-                ['#0f172a', '#334155']
-            ];
-            const gradient = gradients[index % gradients.length];
-            imgSrc = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Cdefs%3E%3ClinearGradient id="grad${projectId}-${index}" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:${encodeURIComponent(gradient[0])};stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:${encodeURIComponent(gradient[1])};stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="800" height="600" fill="url(%23grad${projectId}-${index})" /%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="24" fill="white" text-anchor="middle" dy=".3em"%3EProject Image ${index + 1}%3C/text%3E%3C/svg%3E`;
-        }
-
-        return `
+    if (galleryImages.length > 0) {
+        galleryContainer.style.display = 'grid';
+        galleryContainer.innerHTML = galleryImages.map((img, index) => `
             <div class="gallery-item">
-                <img src="${imgSrc}" alt="${project.title} Image ${index + 1}">
+                <img src="${img}" alt="${project.title} Image ${index + 1}">
             </div>
-        `;
-    }).join('');
+        `).join('');
+    } else {
+        galleryContainer.style.display = 'none';
+    }
 
     // Show Modal
     modal.classList.add('active');

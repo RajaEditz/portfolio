@@ -2,8 +2,18 @@
 
 const DEFAULT_PASS = 'admin123';
 let projects = JSON.parse(localStorage.getItem('portfolio_projects')) || [
-    { id: 1, title: 'Mobile App Design', category: 'UI/UX • Flutter', img: 'project1.jpg' },
-    { id: 2, title: 'Branding Showcase', category: 'Graphic Design', img: 'project2.jpg' }
+    {
+        id: 1,
+        title: 'Ecommerce Redesign',
+        category: 'UI/UX • Web',
+        img: 'project1.jpg',
+        description: 'A complete overhaul of an ecommerce platform to improve user conversion.',
+        problem: 'Users were dropping off at the checkout page due to a complex flow.',
+        solution: 'Simplified the 5-step checkout into a single-page interactive experience.',
+        role: 'Lead UX Designer',
+        tools: 'Figma, Adobe Illustrator',
+        outcome: 'Increased conversion rate by 25% within the first month.'
+    }
 ];
 
 let editingId = null;
@@ -65,17 +75,34 @@ function openModal(id = null) {
         document.getElementById('project-title').value = p.title || '';
         document.getElementById('project-category').value = p.category || '';
         document.getElementById('project-description').value = p.description || '';
+        document.getElementById('project-problem').value = p.problem || '';
+        document.getElementById('project-solution').value = p.solution || '';
+        document.getElementById('project-role').value = p.role || '';
+        document.getElementById('project-tools').value = p.tools || '';
+        document.getElementById('project-outcome').value = p.outcome || '';
         document.getElementById('project-link').value = p.link || '';
-        // Note: File inputs cannot be pre-populated for security reasons
+
+        // Render gallery preview
+        renderAdminGallery(p.gallery || []);
 
         title.textContent = 'Edit Project';
     } else {
         document.getElementById('project-title').value = '';
         document.getElementById('project-category').value = '';
         document.getElementById('project-description').value = '';
+        document.getElementById('project-problem').value = '';
+        document.getElementById('project-solution').value = '';
+        document.getElementById('project-role').value = '';
+        document.getElementById('project-tools').value = '';
+        document.getElementById('project-outcome').value = '';
         document.getElementById('project-link').value = '';
         document.getElementById('project-img-file').value = '';
+        document.getElementById('project-problem-img').value = '';
+        document.getElementById('project-solution-img').value = '';
+        document.getElementById('project-outcome-img').value = '';
         document.getElementById('project-gallery-files').value = '';
+
+        document.getElementById('admin-gallery-preview').innerHTML = '';
         title.textContent = 'Add Project';
     }
 
@@ -90,16 +117,31 @@ async function saveProject() {
     const title = document.getElementById('project-title').value;
     const category = document.getElementById('project-category').value;
     const description = document.getElementById('project-description').value;
+    const problem = document.getElementById('project-problem').value;
+    const solution = document.getElementById('project-solution').value;
+    const role = document.getElementById('project-role').value;
+    const tools = document.getElementById('project-tools').value;
+    const outcome = document.getElementById('project-outcome').value;
     const link = document.getElementById('project-link').value;
     const imgFile = document.getElementById('project-img-file').files[0];
+    const problemImgFile = document.getElementById('project-problem-img').files[0];
+    const solutionImgFile = document.getElementById('project-solution-img').files[0];
+    const outcomeImgFile = document.getElementById('project-outcome-img').files[0];
     const galleryFiles = document.getElementById('project-gallery-files').files;
 
     if (!title || !category) return alert('Please fill in title and category');
 
     let imgData = null;
-    if (imgFile) {
-        imgData = await reader(imgFile);
-    }
+    if (imgFile) imgData = await reader(imgFile);
+
+    let problemImgData = null;
+    if (problemImgFile) problemImgData = await reader(problemImgFile);
+
+    let solutionImgData = null;
+    if (solutionImgFile) solutionImgData = await reader(solutionImgFile);
+
+    let outcomeImgData = null;
+    if (outcomeImgFile) outcomeImgData = await reader(outcomeImgFile);
 
     let galleryData = [];
     if (galleryFiles.length > 0) {
@@ -118,10 +160,18 @@ async function saveProject() {
             title,
             category,
             description,
+            problem,
+            solution,
+            role,
+            tools,
+            outcome,
             link,
             // Only update image if new one provided, otherwise keep existing
             img: imgData || existing.img,
-            // Append new gallery images to existing ones if provided
+            problemImg: problemImgData || existing.problemImg,
+            solutionImg: solutionImgData || existing.solutionImg,
+            outcomeImg: outcomeImgData || existing.outcomeImg,
+            // Images are managed in openModal/renderAdminGallery
             gallery: galleryData.length > 0 ? (existing.gallery || []).concat(galleryData) : (existing.gallery || [])
         };
     } else {
@@ -130,8 +180,16 @@ async function saveProject() {
             title,
             category,
             description,
+            problem,
+            solution,
+            role,
+            tools,
+            outcome,
             link,
-            img: imgData || 'project1.jpg', // Fallback to placeholder if no image
+            img: imgData || 'project1.jpg',
+            problemImg: problemImgData,
+            solutionImg: solutionImgData,
+            outcomeImg: outcomeImgData,
             gallery: galleryData.length > 0 ? galleryData : []
         });
     }
@@ -151,4 +209,24 @@ function deleteProject(id) {
         localStorage.setItem('portfolio_projects', JSON.stringify(projects));
         renderProjectList();
     }
+}
+
+function renderAdminGallery(gallery) {
+    const preview = document.getElementById('admin-gallery-preview');
+    preview.innerHTML = gallery.map((img, index) => `
+        <div class="preview-item">
+            <img src="${img}">
+            <button class="remove-preview" onclick="removeFromGallery(${index})">×</button>
+        </div>
+    `).join('');
+}
+
+function removeFromGallery(index) {
+    if (!editingId) return;
+    const pIndex = projects.findIndex(p => p.id === editingId);
+    if (pIndex === -1) return;
+
+    projects[pIndex].gallery.splice(index, 1);
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+    renderAdminGallery(projects[pIndex].gallery);
 }
