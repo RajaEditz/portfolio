@@ -105,7 +105,7 @@ function loadProjects() {
     const projects = JSON.parse(localStorage.getItem('portfolio_projects')) || [
         {
             id: 1,
-            title: 'Projectu',
+            title: 'Project',
             category: 'UI/UX • Flutter',
             img: 'project1.jpg',
             description: 'A comprehensive mobile application design focused on user experience and modern interface patterns. This project involved extensive user research, wireframing, and high-fidelity prototyping.',
@@ -147,7 +147,7 @@ function openModal(projectId) {
     const projects = JSON.parse(localStorage.getItem('portfolio_projects')) || [
         {
             id: 1,
-            title: 'Projectu',
+            title: 'Project',
             category: 'UI/UX • Flutter',
             img: 'project1.jpg',
             description: 'A comprehensive mobile application design focused on user experience and modern interface patterns. This project involved extensive user research, wireframing, and high-fidelity prototyping.',
@@ -295,13 +295,13 @@ if (specialtyText) {
         if (i < text.length) {
             specialtyText.textContent += text.charAt(i);
             i++;
-            setTimeout(typeWriter, 100);
+            setTimeout(typeWriter, 15);
         }
     }
 
     setTimeout(() => {
         typeWriter();
-    }, 1500);
+    }, 800);
 }
 
 // ===== MAGNETIC BUTTONS =====

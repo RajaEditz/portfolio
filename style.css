@@ -219,27 +219,31 @@ body {
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 12vw, 9rem);
+    font-size: clamp(2.5rem, 6vw, 6rem);
     font-weight: 900;
-    line-height: 0.9;
-    margin-bottom: 2rem;
-    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0;
 }
 
 .title-word {
     display: block;
     opacity: 0;
     animation: slideUp 1s ease-out forwards;
-    color: var(--primary-color);
+    color: #2979ff;
 }
 
 .title-word:first-child {
     animation-delay: 0.2s;
+    white-space: nowrap;
 }
 
 .title-word.director {
     color: var(--light-text);
     animation-delay: 0.5s;
+    font-size: clamp(0.7rem, 2vw, 1.8rem);
+    white-space: nowrap;
+    margin-top: 1rem;
 }
 
 .accent-letter {
@@ -278,12 +282,15 @@ body {
 
 .hero-specialty {
     font-size: 1.1rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.05em;
     color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 500;
     opacity: 0;
     animation: fadeIn 1s ease-out 0.8s forwards;
-    text-transform: uppercase;
+    text-transform: none;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 @keyframes fadeIn {
@@ -797,7 +804,7 @@ body {
 
 @media (max-width: 640px) {
     .hero-title {
-        font-size: clamp(3rem, 10vw, 5rem);
+        font-size: clamp(2rem, 8vw, 4rem);
     }
 
     .stats-grid {
