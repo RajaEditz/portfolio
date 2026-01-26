@@ -194,9 +194,17 @@ async function saveProject() {
         });
     }
 
-    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-    renderProjectList();
-    closeModal();
+    try {
+        localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+        renderProjectList();
+        closeModal();
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            alert('Storage limit exceeded! The images you are trying to upload are too large for browser storage. Please try using smaller/compressed images or fewer photos.');
+        } else {
+            alert('Error saving project: ' + e.message);
+        }
+    }
 }
 
 function editProject(id) {
