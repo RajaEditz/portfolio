@@ -1,0 +1,13 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Creative Designer & Developer Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx servor --reload"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "servor": "^4.0.2"
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Student Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --admin-bg: #0a0a0f;
+            --admin-card: #16161c;
+        }
+
+        body.admin-page {
+            background: var(--admin-bg);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .login-screen {
+            max-width: 400px;
+            margin: 10vh auto;
+            background: var(--admin-card);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            background: #252530;
+            border: 1px solid #353545;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+        }
+
+        button.admin-btn {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        button.admin-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .project-list-admin {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-item-admin {
+            background: var(--admin-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--admin-card);
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body class="admin-page">
+    <a href="index.html" class="back-link">← Back to Site</a>
+
+    <div class="admin-container">
+        <!-- Login Form -->
+        <div id="login-screen" class="login-screen">
+            <h2 style="margin-bottom: 2rem;">Admin Login</h2>
+            <input type="password" id="admin-pass" placeholder="Enter Password">
+            <button class="admin-btn" onclick="login()">Login</button>
+            <p id="login-error" style="color: #ff4d4d; margin-top: 1rem; font-size: 0.8rem; height: 1em;"></p>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="admin-dashboard">
+            <div class="admin-header">
+                <h1>Manage Projects</h1>
+                <button class="admin-btn" onclick="openModal()">+ Add New Project</button>
+            </div>
+
+            <div id="project-list" class="project-list-admin">
+                <!-- Projects will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title" style="margin-bottom: 2rem;">Add Project</h2>
+            <input type="text" id="project-title" placeholder="Project Title">
+            <input type="text" id="project-category" placeholder="Category (e.g. UI/UX • Web)">
+            <textarea id="project-description" placeholder="Project Description (Detailed)" rows="4"
+                style="resize: vertical;"></textarea>
+            <input type="url" id="project-link" placeholder="Live Project Link (optional)">
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem;">Main Image</label>
+                <input type="file" id="project-img-file" accept="image/*">
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem;">Gallery Images
+                    (Select Multiple)</label>
+                <input type="file" id="project-gallery-files" accept="image/*" multiple>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="admin-btn" style="flex: 1;" onclick="saveProject()">Save Project</button>
+                <button class="admin-btn" style="flex: 1; background: #353545;" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
