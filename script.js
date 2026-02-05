@@ -313,13 +313,6 @@ function openModal(projectId) {
     document.querySelector('.modal-category').textContent = project.category;
     document.querySelector('.modal-description').textContent = project.description;
 
-    // Set Main Project Image
-    const mainImg = document.getElementById('modal-main-img');
-    if (mainImg) {
-        mainImg.src = project.img;
-        mainImg.onclick = () => openLightbox(project.img);
-    }
-
     // Case Study Fields
     const caseStudyContainer = document.querySelector('.case-study-details');
     if (project.problem || project.solution || project.role || project.tools || project.outcome) {
