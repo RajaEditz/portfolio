@@ -38,86 +38,6 @@ const DEFAULT_PROJECTS = [
     },
     {
         id: 3,
-        title: 'Fintech Mobile App',
-        category: 'UI/UX • App',
-        img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-        description: 'A comprehensive mobile application design focused on user experience and modern interface patterns. This project involved extensive user research, wireframing, and high-fidelity prototyping.',
-        problem: 'Users found traditional banking apps too cluttered and difficult to navigate, especially for rapid transfers.',
-        solution: 'Developed a minimalist, gesture-based interface with a "One-Tap Send" feature and clear financial health visualizations.',
-        role: 'Lead UX/UI Designer',
-        tools: 'Figma, Adobe XD, ProtoPie',
-        outcome: 'Increased user engagement by 40% and reduced transfer time by 60%.',
-        gallery: [
-            'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80'
-        ]
-    },
-    {
-        id: 4,
-        title: 'Aura Roast Branding',
-        category: 'Graphic Design',
-        img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
-        description: 'Complete brand identity package including logo design, color palette selection, typography, and brand guidelines for a specialty coffee shop.',
-        problem: 'The client needed a visual identity that felt both "premium" and "approachable" to stand out in a crowded urban market.',
-        solution: 'Created a logo inspired by the golden ratio and the shape of a coffee bean, paired with earth-toned colors and elegant serif typography.',
-        role: 'Brand Designer',
-        tools: 'Adobe Illustrator, Photoshop',
-        outcome: 'The brand successfully launched two locations and achieved strong social media recognition within 3 months.',
-        gallery: [
-            'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80'
-        ]
-    },
-    {
-        id: 5,
-        title: 'Modern Architecture Web',
-        category: 'Web Development',
-        img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-        description: 'A high-end, minimal portfolio website for a luxury architecture firm featuring immersive galleries and smooth animations.',
-        problem: 'Former site was slow and didn\'t showcase large-scale high-resolution imagery effectively.',
-        solution: 'Built a responsive, SPA-style website using modern CSS techniques and GSAP for fluid transitions between projects.',
-        role: 'Frontend Developer',
-        tools: 'HTML5, CSS3, JavaScript, GSAP',
-        outcome: 'Improved site load performance by 50% and received "Site of the Day" nomination.',
-        gallery: [
-            'https://images.unsplash.com/photo-1503387762-592dea58ef21?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
-        ]
-    },
-    {
-        id: 6,
-        title: 'Urban Fashion Lookbook',
-        category: 'Multimedia',
-        img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80',
-        description: 'Cinematic video lookbook and social media campaign for a new streetwear brand launch.',
-        problem: 'The brand needed to capture the attention of Gen Z audiences through short-form, high-impact visual content.',
-        solution: 'Produced a series of high-energy reels and a main lookbook video using creative transition techniques and custom color grading.',
-        role: 'Video Editor & Colorist',
-        tools: 'Premiere Pro, After Effects, DaVinci Resolve',
-        outcome: 'Campaign reached over 100k views organically on Instagram and TikTok.',
-        gallery: [
-            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80'
-        ]
-    },
-    {
-        id: 7,
-        title: 'HomeSmart Ecosystem',
-        category: 'App Development',
-        img: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80',
-        description: 'Cross-platform mobile application for controlling smart home devices with an emphasis on automation and energy efficiency.',
-        problem: 'Existing smart home apps felt fragmented and required too many steps to perform basic routines.',
-        solution: 'Developed a unified control system with AI-driven suggestions based on user habits and simple automation "recipes".',
-        role: 'Mobile Developer',
-        tools: 'React Native, Node.js, Firebase',
-        outcome: 'Highly rated on App Store for its clean design and reliability.',
-        gallery: [
-            'https://images.unsplash.com/photo-1558002038-1037906d98e4?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1512050648246-a854a0910245?auto=format&fit=crop&w=800&q=80'
-        ]
-    },
-    {
-        id: 8,
         title: 'Poster Design Projects',
         category: 'Graphic Design',
         img: 'assets/projects/poster-thumb.jpg',
@@ -137,7 +57,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 9,
+        id: 4,
         title: 'Thumbnail Design Projects',
         category: 'Graphic Design • Youtube',
         img: 'assets/projects/thumb-design.png',
@@ -166,6 +86,10 @@ try {
     const stored = localStorage.getItem('portfolio_projects');
     if (stored) {
         projects = JSON.parse(stored);
+
+        // Auto-cleanup: remove projects that are no longer in DEFAULT_PROJECTS
+        projects = projects.filter(p => DEFAULT_PROJECTS.some(dp => dp.id === p.id));
+        localStorage.setItem('portfolio_projects', JSON.stringify(projects));
     }
     if (!projects || !Array.isArray(projects) || projects.length === 0) {
         projects = DEFAULT_PROJECTS;
