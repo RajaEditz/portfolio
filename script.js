@@ -221,7 +221,7 @@ const DEFAULT_PROJECTS = [
         id: 7,
         title: 'Poster Design Projects',
         category: 'Graphic Design',
-        img: 'assets/projects/pongal-nms.png',
+        img: 'assets/projects/poster-thumb.jpg',
         description: 'A collection of vibrant festival posters and commercial advertisements designed for local businesses, focusing on traditional themes and modern marketing.',
         problem: 'Local businesses needed eye-catching visuals to celebrate festivals and promote special offers while maintaining cultural resonance.',
         solution: 'Designed a series of posters using rich typography, vibrant color palettes, and high-quality imagery that blended tradition with professional branding.',
