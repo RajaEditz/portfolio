@@ -81,6 +81,25 @@ const DEFAULT_PROJECTS = [
             'https://images.unsplash.com/photo-1558002038-1037906d98e4?auto=format&fit=crop&w=800&q=80',
             'https://images.unsplash.com/photo-1512050648246-a854a0910245?auto=format&fit=crop&w=800&q=80'
         ]
+    },
+    {
+        id: 6,
+        title: 'Poster Design Projects',
+        category: 'Graphic Design',
+        img: 'assets/projects/pongal-nms.png',
+        description: 'A collection of vibrant festival posters and commercial advertisements designed for local businesses, focusing on traditional themes and modern marketing.',
+        problem: 'Local businesses needed eye-catching visuals to celebrate festivals and promote special offers while maintaining cultural resonance.',
+        solution: 'Designed a series of posters using rich typography, vibrant color palettes, and high-quality imagery that blended tradition with professional branding.',
+        role: 'Graphic Designer',
+        tools: 'Adobe Photoshop, Illustrator',
+        outcome: 'The posters were widely shared on social media and used for local physical distribution, leading to increased customer walk-ins during the festival season.',
+        gallery: [
+            'assets/projects/pongal-nms.png',
+            'assets/projects/pongal-bysul-store.jpg',
+            'assets/projects/pongal-bysul-trading.jpg',
+            'assets/projects/new-year-bysul.png',
+            'assets/projects/pongal-offer-friends.jpg'
+        ]
     }
 ];
 
