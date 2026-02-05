@@ -275,6 +275,7 @@ function openModal(projectId) {
             if (src) {
                 imgEl.src = src;
                 imgEl.style.display = 'block';
+                imgEl.onclick = () => openLightbox(src); // Add lightbox click
             } else {
                 imgEl.style.display = 'none';
             }
@@ -295,7 +296,7 @@ function openModal(projectId) {
     if (galleryImages.length > 0) {
         galleryContainer.style.display = 'grid';
         galleryContainer.innerHTML = galleryImages.map((img, index) => `
-            <div class="gallery-item">
+            <div class="gallery-item" onclick="openLightbox('${img}')">
                 <img src="${img}" alt="${project.title} Image ${index + 1}">
             </div>
         `).join('');
@@ -345,9 +346,38 @@ if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
+    if (e.key === 'Escape') {
+        if (modal.classList.contains('active')) closeModal();
+        if (lightbox.classList.contains('active')) closeLightbox();
     }
+});
+
+// ===== LIGHTBOX LOGIC =====
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+function openLightbox(src) {
+    if (!src) return;
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+    // Ensure lightbox is above the main modal
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+}
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+
+// Make case study images clickable for lightbox
+document.querySelectorAll('.case-study-content img').forEach(img => {
+    img.onclick = function () {
+        openLightbox(this.src);
+    };
 });
 
 function handleProjectImages() {
