@@ -770,6 +770,15 @@ body {
     cursor: pointer;
     background: rgba(255, 255, 255, 0.05);
     /* Slightly more visible background */
+    z-index: 10;
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    .project-card:active {
+        transform: scale(0.98);
+        background: rgba(255, 255, 255, 0.1);
+    }
 }
 
 .project-card:nth-child(1) {

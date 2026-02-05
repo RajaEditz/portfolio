@@ -101,6 +101,11 @@ let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
 
 document.addEventListener('mousemove', (e) => {
+    // Hide cursor on touch devices to prevent interaction issues
+    if (window.matchMedia('(pointer: coarse)').matches) {
+        cursor.style.display = 'none';
+        return;
+    }
     mouseX = e.clientX;
     mouseY = e.clientY;
     cursor.style.opacity = '1';
@@ -273,7 +278,17 @@ const modalBackBtn = document.querySelector('.back-button');
 const modalOverlay = document.querySelector('.modal-overlay');
 
 function openModal(projectId) {
-    projects = JSON.parse(localStorage.getItem('portfolio_projects')) || DEFAULT_PROJECTS;
+    try {
+        const stored = localStorage.getItem('portfolio_projects');
+        if (stored) {
+            projects = JSON.parse(stored);
+        }
+        if (!projects || !Array.isArray(projects) || projects.length === 0) {
+            projects = DEFAULT_PROJECTS;
+        }
+    } catch (e) {
+        projects = DEFAULT_PROJECTS;
+    }
     const project = projects.find(p => p.id === projectId);
     if (!project) return;
 
