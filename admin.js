@@ -4,6 +4,21 @@ const DEFAULT_PASS = 'admin123';
 const DEFAULT_PROJECTS = [
     {
         id: 1,
+        title: 'City Rider App Design',
+        category: 'UI/UX • Mobile App',
+        img: 'assets/projects/city-rider.png',
+        description: 'A comprehensive ride-sharing mobile application design featuring user-centric workflows for booking, driver tracking, and payment integration.',
+        problem: 'Commuters in urban areas needed a more intuitive and faster way to book rides with clear pricing and driver verification.',
+        solution: 'Developed a high-fidelity UI design with optimized booking flows, real-time map tracking, and a clean, modern aesthetic to enhance trust and usability.',
+        role: 'Lead UI/UX Designer',
+        tools: 'Figma, Adobe Illustrator',
+        outcome: 'Completed a full 24-screen design system that streamlines the user journey from onboarding to destination arrival.',
+        gallery: [
+            'assets/projects/city-rider.png'
+        ]
+    },
+    {
+        id: 2,
         title: 'Fintech Mobile App',
         category: 'UI/UX • App',
         img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
@@ -19,7 +34,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 2,
+        id: 3,
         title: 'Aura Roast Branding',
         category: 'Graphic Design',
         img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
@@ -35,7 +50,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 3,
+        id: 4,
         title: 'Modern Architecture Web',
         category: 'Web Development',
         img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
@@ -51,7 +66,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 4,
+        id: 5,
         title: 'Urban Fashion Lookbook',
         category: 'Multimedia',
         img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80',
@@ -67,7 +82,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 5,
+        id: 6,
         title: 'HomeSmart Ecosystem',
         category: 'App Development',
         img: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80',
@@ -83,7 +98,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 6,
+        id: 7,
         title: 'Poster Design Projects',
         category: 'Graphic Design',
         img: 'assets/projects/pongal-nms.png',
