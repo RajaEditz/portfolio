@@ -16,6 +16,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.getElementById('navbar');
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navMenu = document.querySelector('.nav-menu');
+
+// Mobile Menu Toggle
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+}
+
+// Close menu when clicking a link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+});
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
