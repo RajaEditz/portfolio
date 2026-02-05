@@ -139,6 +139,25 @@ const DEFAULT_PROJECTS = [
     },
     {
         id: 2,
+        title: 'Beauty Parlor Branding',
+        category: 'Graphic Design • Branding',
+        img: 'assets/projects/beauty-thumb.jpg',
+        description: 'A sophisticated visual identity and marketing collateral design for Haniya Beauty Parlour and Sakeena Makeup Artist.',
+        problem: 'The client needed a luxurious and inviting brand presence that appeals to modern clients looking for professional makeup and salon services.',
+        solution: 'Developed a cohesive branding system using gold accents, elegant typography, and high-quality lifestyle imagery to convey professionalism and luxury.',
+        role: 'Lead Brand Designer',
+        tools: 'Adobe Photoshop, Illustrator',
+        outcome: 'Successfully created a suite of digital and print materials that helped establish a premium market position for the parlor.',
+        gallery: [
+            'assets/projects/beauty-logo.jpg',
+            'assets/projects/beauty-thumb.jpg',
+            'assets/projects/beauty-contact.jpg',
+            'assets/projects/beauty-pricing.jpg',
+            'assets/projects/beauty-flyer.jpg'
+        ]
+    },
+    {
+        id: 3,
         title: 'Fintech Mobile App',
         category: 'UI/UX • App',
         img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
@@ -154,7 +173,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 3,
+        id: 4,
         title: 'Aura Roast Branding',
         category: 'Graphic Design',
         img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
@@ -170,7 +189,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 4,
+        id: 5,
         title: 'Modern Architecture Web',
         category: 'Web Development',
         img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
@@ -186,7 +205,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 5,
+        id: 6,
         title: 'Urban Fashion Lookbook',
         category: 'Multimedia',
         img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80',
@@ -202,7 +221,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 6,
+        id: 7,
         title: 'HomeSmart Ecosystem',
         category: 'App Development',
         img: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&q=80',
@@ -218,7 +237,7 @@ const DEFAULT_PROJECTS = [
         ]
     },
     {
-        id: 7,
+        id: 8,
         title: 'Poster Design Projects',
         category: 'Graphic Design',
         img: 'assets/projects/poster-thumb.jpg',
