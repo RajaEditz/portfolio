@@ -449,8 +449,9 @@ function handleProjectImages() {
     ];
 
     projectImages.forEach((img, index) => {
-        if (!img.src || img.src.includes('project') || img.src.includes('data:image')) {
-            if (img.src.includes('data:image')) return; // skip if already processed
+        // Only replace if src is missing, empty, or a generic placeholder like "project1.jpg"
+        const src = img.getAttribute('src');
+        if (!src || src === '#' || src.match(/^project\d+\.\w+$/)) {
             const gradient = projectGradients[index % projectGradients.length];
             img.src = `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Cdefs%3E%3ClinearGradient id="grad${index}" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:${encodeURIComponent(gradient.start)};stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:${encodeURIComponent(gradient.end)};stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="800" height="600" fill="url(%23grad${index})" /%3E%3Ctext x="50%25" y="50%25" font-family="Arial" font-size="48" fill="white" text-anchor="middle" dy=".3em"%3E${gradient.name}%3C/text%3E%3C/svg%3E`;
         }
