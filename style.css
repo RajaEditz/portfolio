@@ -757,11 +757,11 @@ body {
     border-radius: 25px;
     overflow: hidden;
     height: auto;
-    /* Changed from 400px to auto */
+    min-height: 250px;
+    /* Added min-height to prevent collapse on mobile */
     cursor: pointer;
-    opacity: 0;
-    background: rgba(255, 255, 255, 0.02);
-    animation: fadeInUp 1s ease-out forwards;
+    background: rgba(255, 255, 255, 0.05);
+    /* Slightly more visible background */
 }
 
 .project-card:nth-child(1) {
@@ -820,6 +820,20 @@ body {
 .project-card:hover .project-overlay {
     transform: translateY(0);
     opacity: 1;
+}
+
+/* Make overlay visible on mobile since hover doesn't exist */
+@media (max-width: 768px) {
+    .project-overlay {
+        opacity: 1;
+        transform: translateY(0);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+        padding: 1.5rem;
+    }
+
+    .project-overlay h3 {
+        font-size: 1.4rem;
+    }
 }
 
 .project-overlay h3 {
@@ -1320,6 +1334,12 @@ li {
 
 /* ===== IMAGE ANIMATIONS ===== */
 img {
+    max-width: 100%;
+}
+
+/* Removed global opacity 0 and animation to ensure images show immediately if JS/CSS animations fail */
+.about-image img,
+.project-card img {
     opacity: 0;
     animation: fadeInImage 1s ease-out forwards;
 }

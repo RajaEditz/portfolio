@@ -420,7 +420,7 @@ function handleProjectImages() {
 
 // ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
 const observerOptions = {
-    threshold: 0.2,
+    threshold: 0.1,
     rootMargin: '0px'
 };
 
