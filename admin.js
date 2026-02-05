@@ -347,3 +347,43 @@ function resetDefaults() {
         alert('Projects reset to high-quality defaults!');
     }
 }
+
+// ===== SYNC / TRANSFER LOGIC =====
+function openSyncModal() {
+    document.getElementById('sync-modal').style.display = 'flex';
+}
+
+function closeSyncModal() {
+    document.getElementById('sync-modal').style.display = 'none';
+    document.getElementById('sync-input').value = '';
+}
+
+function copySyncData() {
+    const data = JSON.stringify(projects);
+    navigator.clipboard.writeText(data).then(() => {
+        alert('Sync Code Copied! Now open this admin page on your phone and paste it in the "Import" box.');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy. Please manually copy the data from a new window.');
+    });
+}
+
+function importSyncData() {
+    const input = document.getElementById('sync-input').value;
+    if (!input) return alert('Please paste the sync code first.');
+
+    try {
+        const importedProjects = JSON.parse(input);
+        if (!Array.isArray(importedProjects)) throw new Error('Invalid format');
+
+        if (confirm('This will overwrite all projects on this device. Continue?')) {
+            projects = importedProjects;
+            localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+            renderProjectList();
+            alert('Sync Successful! Your mobile portfolio is now updated.');
+            closeSyncModal();
+        }
+    } catch (e) {
+        alert('Invalid Sync Code. Please make sure you copied the entire code correctly.');
+    }
+}

@@ -178,9 +178,11 @@
         <div id="dashboard" class="admin-dashboard">
             <div class="admin-header">
                 <h1>Manage Projects</h1>
-                <div style="display: flex; gap: 1rem;">
-                    <button class="admin-btn" style="background: #353545;" onclick="resetDefaults()">Reset to
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="admin-btn" style="background: #353545;" onclick="resetDefaults()">Reset
                         Defaults</button>
+                    <button class="admin-btn" style="background: #7c3aed;" onclick="openSyncModal()">Transfer
+                        Projects</button>
                     <button class="admin-btn" onclick="openModal()">+ Add New Project</button>
                 </div>
             </div>
@@ -248,6 +250,38 @@
                 <button class="admin-btn" style="flex: 1;" onclick="saveProject()">Save Project</button>
                 <button class="admin-btn" style="flex: 1; background: #353545;" onclick="closeModal()">Cancel</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Sync/Transfer Modal -->
+    <div id="sync-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 2rem;">Transfer Projects</h2>
+            <p style="color: #aaa; margin-bottom: 2rem; font-size: 0.9rem;">
+                Since your projects are stored locally in your browser, you can use these tools to move your edits to
+                another device (like your phone).
+            </p>
+
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #fff; font-size: 0.9rem;">1. Export
+                    Portfolio</label>
+                <p style="color: #888; margin-bottom: 1rem; font-size: 0.8rem;">Copy this code on your Desktop:</p>
+                <button class="admin-btn" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;"
+                    onclick="copySyncData()">Copy Sync Code</button>
+            </div>
+
+            <div style="margin-bottom: 2.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #fff; font-size: 0.9rem;">2. Import
+                    Portfolio</label>
+                <p style="color: #888; margin-bottom: 1rem; font-size: 0.8rem;">Paste that code here on your Mobile:</p>
+                <textarea id="sync-input" placeholder="Paste your sync code here..." rows="4"
+                    style="background: #1a1a24; border: 1px dashed #444;"></textarea>
+                <button class="admin-btn" style="width: 100%; border-radius: 8px; background: #00d9ff;"
+                    onclick="importSyncData()">Import & Sync</button>
+            </div>
+
+            <button class="admin-btn" style="width: 100%; background: #353545;"
+                onclick="closeSyncModal()">Close</button>
         </div>
     </div>
 
