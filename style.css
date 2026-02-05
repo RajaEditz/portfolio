@@ -592,6 +592,42 @@ body {
     letter-spacing: 0.05em;
 }
 
+.modal-category {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.modal-hero-container {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#modal-main-img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.modal-hero-container:hover #modal-main-img {
+    transform: scale(1.02);
+}
+
+.modal-body {
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
 .skills-items {
     display: flex;
     flex-wrap: wrap;
