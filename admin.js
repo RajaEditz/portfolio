@@ -33,7 +33,8 @@ const DEFAULT_PROJECTS = [
             'assets/projects/beauty-thumb.jpg',
             'assets/projects/beauty-contact.jpg',
             'assets/projects/beauty-pricing.jpg',
-            'assets/projects/beauty-flyer.jpg'
+            'assets/projects/beauty-flyer.jpg',
+            'assets/projects/beauty-banner.jpg'
         ]
     },
     {
