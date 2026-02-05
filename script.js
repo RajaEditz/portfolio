@@ -272,7 +272,11 @@ const DEFAULT_PROJECTS = [
             'assets/projects/thumb-logo.png',
             'assets/projects/thumb-multimedia.png',
             'assets/projects/thumb-editing.png',
-            'assets/projects/thumb-vibe.png'
+            'assets/projects/thumb-vibe.png',
+            'assets/projects/thumb-web.png',
+            'assets/projects/thumb-uiux.png',
+            'assets/projects/thumb-graphic.png',
+            'assets/projects/thumb-app.png'
         ]
     }
 ];
