@@ -178,7 +178,11 @@
         <div id="dashboard" class="admin-dashboard">
             <div class="admin-header">
                 <h1>Manage Projects</h1>
-                <button class="admin-btn" onclick="openModal()">+ Add New Project</button>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="admin-btn" style="background: #353545;" onclick="resetDefaults()">Reset to
+                        Defaults</button>
+                    <button class="admin-btn" onclick="openModal()">+ Add New Project</button>
+                </div>
             </div>
 
             <div id="project-list" class="project-list-admin">
