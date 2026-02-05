@@ -1405,13 +1405,36 @@ img {
 /* ===== SCROLL-TRIGGERED ANIMATIONS ===== */
 .animate-on-scroll {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Fallback: if IntersectionObserver fails, show items after a delay */
+@media (prefers-reduced-motion: no-preference) {
+    .animate-on-scroll {
+        animation: showFallback 0s 2s forwards;
+    }
+}
+
+@keyframes showFallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile specific project card visibility */
+@media (max-width: 768px) {
+    .project-card {
+        opacity: 1 !important;
+        transform: none !important;
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* Unified premium background is now applied to the body globally */

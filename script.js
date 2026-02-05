@@ -420,8 +420,8 @@ function handleProjectImages() {
 
 // ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px'
+    threshold: 0,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -486,7 +486,6 @@ window.addEventListener('load', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadProjects();
-    observeNewElements();
 });
 
 console.log('🎨 Modern Portfolio Loaded! ✨');
