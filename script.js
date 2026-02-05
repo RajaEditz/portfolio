@@ -264,19 +264,31 @@ try {
     if (stored) {
         projects = JSON.parse(stored);
 
-        // Auto-sync: If a default project is missing from stored projects, add it.
-        // This ensures new "hardcoded" projects appear even for returning users.
+        // SMART SYNC: Update existing default projects or add missing ones
         let updated = false;
         DEFAULT_PROJECTS.forEach(defaultProj => {
-            const exists = projects.some(p => p.id === defaultProj.id || p.title === defaultProj.title);
-            if (!exists) {
+            const existingIndex = projects.findIndex(p => p.id === defaultProj.id);
+
+            if (existingIndex === -1) {
+                // Doesn't exist, add it
                 projects.push(defaultProj);
                 updated = true;
+            } else {
+                // Exists, but we want to make sure the core assets (images/gallery) 
+                // match the latest hardcoded perfection in script.js
+                const p = projects[existingIndex];
+                if (p.img !== defaultProj.img || JSON.stringify(p.gallery) !== JSON.stringify(defaultProj.gallery)) {
+                    p.img = defaultProj.img;
+                    p.gallery = defaultProj.gallery;
+                    // Also update title/category if they changed
+                    p.title = defaultProj.title;
+                    p.category = defaultProj.category;
+                    updated = true;
+                }
             }
         });
 
         if (updated) {
-            // Re-sort by ID to keep order consistent
             projects.sort((a, b) => a.id - b.id);
             localStorage.setItem('portfolio_projects', JSON.stringify(projects));
         }
