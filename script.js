@@ -264,7 +264,25 @@ try {
     const stored = localStorage.getItem('portfolio_projects');
     if (stored) {
         projects = JSON.parse(stored);
+
+        // Auto-sync: If a default project is missing from stored projects, add it.
+        // This ensures new "hardcoded" projects appear even for returning users.
+        let updated = false;
+        DEFAULT_PROJECTS.forEach(defaultProj => {
+            const exists = projects.some(p => p.id === defaultProj.id || p.title === defaultProj.title);
+            if (!exists) {
+                projects.push(defaultProj);
+                updated = true;
+            }
+        });
+
+        if (updated) {
+            // Re-sort by ID to keep order consistent
+            projects.sort((a, b) => a.id - b.id);
+            localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+        }
     }
+
     if (!projects || !Array.isArray(projects) || projects.length === 0) {
         projects = DEFAULT_PROJECTS;
     }
@@ -279,18 +297,7 @@ function loadProjects() {
     const container = document.getElementById('projects-container');
     if (!container) return;
 
-    try {
-        const stored = localStorage.getItem('portfolio_projects');
-        if (stored) {
-            projects = JSON.parse(stored);
-        }
-        if (!projects || !Array.isArray(projects) || projects.length === 0) {
-            projects = DEFAULT_PROJECTS;
-        }
-    } catch (e) {
-        projects = DEFAULT_PROJECTS;
-    }
-
+    // Use the globally initialized 'projects' array which is already synced
     container.innerHTML = projects.map(p => `
         <div class="project-card animate-on-scroll" onclick="openModal(${p.id})">
             <div class="project-image">
@@ -314,17 +321,7 @@ const modalBackBtn = document.querySelector('.back-button');
 const modalOverlay = document.querySelector('.modal-overlay');
 
 function openModal(projectId) {
-    try {
-        const stored = localStorage.getItem('portfolio_projects');
-        if (stored) {
-            projects = JSON.parse(stored);
-        }
-        if (!projects || !Array.isArray(projects) || projects.length === 0) {
-            projects = DEFAULT_PROJECTS;
-        }
-    } catch (e) {
-        projects = DEFAULT_PROJECTS;
-    }
+    // projects array is already initialized and synced globally
     const project = projects.find(p => p.id === projectId);
     if (!project) return;
 
