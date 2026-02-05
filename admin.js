@@ -60,7 +60,7 @@ const DEFAULT_PROJECTS = [
         id: 4,
         title: 'Thumbnail Design Projects',
         category: 'Graphic Design • Youtube',
-        img: 'assets/projects/thumb-design.png',
+        img: 'assets/projects/thumbnail-main.jpg',
         description: 'A collection of high-click-through-rate (CTR) thumbnail designs for various services, including logo design, multimedia, and tech content.',
         problem: 'Content creators and service providers needed visually striking thumbnails to grab attention in a crowded digital landscape.',
         solution: 'Created custom-themed thumbnails using bold typography, high-contrast colors, and professional layouts tailored to specific niches like AI coding and logo design.',
@@ -68,6 +68,7 @@ const DEFAULT_PROJECTS = [
         tools: 'Adobe Photoshop, Illustrator',
         outcome: 'Increased visual engagement and brand professionalization for the featured services.',
         gallery: [
+            'assets/projects/thumbnail-main.jpg',
             'assets/projects/thumb-design.png',
             'assets/projects/thumb-logo.png',
             'assets/projects/thumb-multimedia.png',
