@@ -27,13 +27,20 @@ html {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #050505;
     background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #000000 70%);
     background-attachment: fixed;
     color: var(--light-text);
-    overflow-x: hidden;
     line-height: 1.6;
     position: relative;
 }
@@ -263,15 +270,15 @@ body {
 
 .title-word:first-child {
     animation-delay: 0.2s;
-    white-space: nowrap;
+    /* Removed white-space: nowrap to prevent overflow on mobile */
 }
 
 .title-word.director {
     color: var(--light-text);
     animation-delay: 0.5s;
     font-size: clamp(0.7rem, 2vw, 1.8rem);
-    white-space: nowrap;
     margin-top: 1rem;
+    line-height: 1.4;
 }
 
 .accent-letter {
@@ -495,8 +502,9 @@ body {
 }
 
 .stats-grid {
-    display: flex;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 3rem;
     margin-bottom: 4rem;
 }
 
@@ -555,8 +563,8 @@ body {
 
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
     margin-top: 4rem;
 }
 
@@ -1150,6 +1158,8 @@ body {
 @media (max-width: 768px) {
     #navbar {
         top: 0;
+        left: 0;
+        transform: none;
         width: 100%;
         border-radius: 0;
         border-left: none;
@@ -1186,12 +1196,23 @@ body {
     }
 
     .hero-title {
-        font-size: clamp(2rem, 10vw, 4rem);
+        font-size: clamp(1.8rem, 8vw, 3rem);
+        padding: 0 1rem;
+    }
+
+    .hero-specialty {
+        font-size: 1rem;
+        padding: 0 1rem;
+        text-align: center;
+    }
+
+    .title-word {
+        white-space: normal !important;
     }
 
     .title-word.director {
-        white-space: normal;
         font-size: 1.1rem;
+        padding-top: 1rem;
     }
 
     .section-title {
@@ -1200,12 +1221,17 @@ body {
 
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 2.5rem;
         text-align: center;
+        width: 100%;
+        padding: 0 1rem;
     }
 
     .stat-item {
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .contact-subtitle {
@@ -1251,12 +1277,18 @@ body {
         padding: 1.5rem;
     }
 
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .modal-content {
         padding: 1.5rem;
+        border-radius: 15px;
     }
 
     .project-overlay h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 }
 
