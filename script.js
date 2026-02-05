@@ -199,7 +199,19 @@ const DEFAULT_PROJECTS = [
     }
 ];
 
-let projects = JSON.parse(localStorage.getItem('portfolio_projects')) || DEFAULT_PROJECTS;
+let projects = [];
+try {
+    const stored = localStorage.getItem('portfolio_projects');
+    if (stored) {
+        projects = JSON.parse(stored);
+    }
+    if (!projects || !Array.isArray(projects) || projects.length === 0) {
+        projects = DEFAULT_PROJECTS;
+    }
+} catch (e) {
+    console.error('Error loading projects from storage:', e);
+    projects = DEFAULT_PROJECTS;
+}
 
 
 // ===== DYNAMIC PROJECTS LOADING =====
@@ -207,7 +219,17 @@ function loadProjects() {
     const container = document.getElementById('projects-container');
     if (!container) return;
 
-    projects = JSON.parse(localStorage.getItem('portfolio_projects')) || DEFAULT_PROJECTS;
+    try {
+        const stored = localStorage.getItem('portfolio_projects');
+        if (stored) {
+            projects = JSON.parse(stored);
+        }
+        if (!projects || !Array.isArray(projects) || projects.length === 0) {
+            projects = DEFAULT_PROJECTS;
+        }
+    } catch (e) {
+        projects = DEFAULT_PROJECTS;
+    }
 
     container.innerHTML = projects.map(p => `
         <div class="project-card animate-on-scroll" onclick="openModal(${p.id})">

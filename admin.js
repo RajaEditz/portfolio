@@ -84,7 +84,18 @@ const DEFAULT_PROJECTS = [
     }
 ];
 
-let projects = JSON.parse(localStorage.getItem('portfolio_projects')) || DEFAULT_PROJECTS;
+let projects = [];
+try {
+    const stored = localStorage.getItem('portfolio_projects');
+    if (stored) {
+        projects = JSON.parse(stored);
+    }
+    if (!projects || !Array.isArray(projects) || projects.length === 0) {
+        projects = DEFAULT_PROJECTS;
+    }
+} catch (e) {
+    projects = DEFAULT_PROJECTS;
+}
 
 let editingId = null;
 
