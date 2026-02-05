@@ -127,13 +127,43 @@ function renderProjectList() {
     `).join('');
 }
 
-// Helper to read file as Data URL
-const reader = (file) => new Promise((resolve, reject) => {
-    const fr = new FileReader();
-    fr.onload = () => resolve(fr.result);
-    fr.onerror = (err) => reject(err);
-    fr.readAsDataURL(file);
-});
+// Helper to read and compress image
+const compressImage = (file, maxWidth = 1000, maxHeight = 1000, quality = 0.6) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                // Convert to JPEG with quality reduction to save space
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = reject;
+        };
+        reader.onerror = reject;
+    });
+};
 
 function openModal(id = null) {
     editingId = id;
@@ -202,21 +232,21 @@ async function saveProject() {
     if (!title || !category) return alert('Please fill in title and category');
 
     let imgData = null;
-    if (imgFile) imgData = await reader(imgFile);
+    if (imgFile) imgData = await compressImage(imgFile);
 
     let problemImgData = null;
-    if (problemImgFile) problemImgData = await reader(problemImgFile);
+    if (problemImgFile) problemImgData = await compressImage(problemImgFile);
 
     let solutionImgData = null;
-    if (solutionImgFile) solutionImgData = await reader(solutionImgFile);
+    if (solutionImgFile) solutionImgData = await compressImage(solutionImgFile);
 
     let outcomeImgData = null;
-    if (outcomeImgFile) outcomeImgData = await reader(outcomeImgFile);
+    if (outcomeImgFile) outcomeImgData = await compressImage(outcomeImgFile);
 
     let galleryData = [];
     if (galleryFiles.length > 0) {
         for (let i = 0; i < galleryFiles.length; i++) {
-            const data = await reader(galleryFiles[i]);
+            const data = await compressImage(galleryFiles[i]);
             galleryData.push(data);
         }
     }
