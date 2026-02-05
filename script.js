@@ -133,6 +133,7 @@ const DEFAULT_PROJECTS = [
         role: 'Lead UI/UX Designer',
         tools: 'Figma, Adobe Illustrator',
         outcome: 'Completed a full 24-screen design system that streamlines the user journey from onboarding to destination arrival.',
+        link: 'https://www.figma.com/design/7lzqEX3owAH90tYd23FsR2/CITY-RIDER---USER-INTERFACE--?node-id=0-1&t=nkcLzEsDQjJR559B-1',
         gallery: [
             'assets/projects/city-rider.png'
         ]
@@ -228,12 +229,14 @@ try {
                 if (p.img !== defaultProj.img ||
                     JSON.stringify(p.gallery) !== JSON.stringify(defaultProj.gallery) ||
                     p.title !== defaultProj.title ||
-                    p.category !== defaultProj.category) {
+                    p.category !== defaultProj.category ||
+                    p.link !== defaultProj.link) {
 
                     p.img = defaultProj.img;
                     p.gallery = defaultProj.gallery;
                     p.title = defaultProj.title;
                     p.category = defaultProj.category;
+                    p.link = defaultProj.link;
                     updated = true;
                 }
             }
@@ -341,29 +344,13 @@ function openModal(projectId) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Disable scroll
 
-    // Update Live Link
-    const footer = document.querySelector('.modal-footer');
-    const existingLiveBtn = footer.querySelector('.live-btn');
-    if (existingLiveBtn) existingLiveBtn.remove(); // Clear previous button
-
+    // Update Live Link (Header Button)
+    const liveBtn = document.getElementById('modal-live-link');
     if (project.link) {
-        const liveBtn = document.createElement('a');
         liveBtn.href = project.link;
-        liveBtn.target = '_blank';
-        liveBtn.className = 'back-button live-btn';
-        liveBtn.style.background = 'var(--gradient-accent)';
-        liveBtn.style.color = 'white';
-        liveBtn.style.border = 'none';
-        liveBtn.style.marginRight = '1rem';
-        liveBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-            Live Project
-        `;
-        footer.insertBefore(liveBtn, footer.firstChild);
+        liveBtn.style.display = 'flex';
+    } else {
+        liveBtn.style.display = 'none';
     }
 }
 

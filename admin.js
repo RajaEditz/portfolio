@@ -13,6 +13,7 @@ const DEFAULT_PROJECTS = [
         role: 'Lead UI/UX Designer',
         tools: 'Figma, Adobe Illustrator',
         outcome: 'Completed a full 24-screen design system that streamlines the user journey from onboarding to destination arrival.',
+        link: 'https://www.figma.com/design/7lzqEX3owAH90tYd23FsR2/CITY-RIDER---USER-INTERFACE--?node-id=0-1&t=nkcLzEsDQjJR559B-1',
         gallery: [
             'assets/projects/city-rider.png'
         ]

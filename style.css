@@ -1547,7 +1547,37 @@ img {
 
 .modal-header {
     margin-bottom: 2rem;
-    text-align: center;
+    text-align: left;
+}
+
+.modal-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.live-project-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.2rem;
+    background: rgba(var(--primary-rgb, 0, 217, 255), 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(var(--primary-rgb, 0, 217, 255), 0.2);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.live-project-btn:hover {
+    background: var(--primary-color);
+    color: #111;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
 }
 
 .modal-category {
@@ -1562,7 +1592,7 @@ img {
 
 .modal-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     color: #fff;
     margin: 0;
 }
