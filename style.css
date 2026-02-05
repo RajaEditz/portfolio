@@ -728,9 +728,11 @@ body {
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    height: 400px;
+    height: auto;
+    /* Changed from 400px to auto */
     cursor: pointer;
     opacity: 0;
+    background: rgba(255, 255, 255, 0.02);
     animation: fadeInUp 1s ease-out forwards;
 }
 
@@ -763,8 +765,11 @@ body {
 
 .project-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    /* Changed from 100% to auto */
+    display: block;
+    object-fit: contain;
+    /* Using contain to ensure full image is seen without stretching/cropping */
     transition: transform 0.6s ease;
 }
 
@@ -1354,8 +1359,10 @@ img {
 .gallery-item {
     border-radius: 12px;
     overflow: hidden;
-    height: 250px;
+    height: auto;
+    /* Changed from 250px to auto */
     cursor: zoom-in;
+    background: rgba(255, 255, 255, 0.02);
     transition: transform 0.3s ease;
 }
 
@@ -1365,8 +1372,10 @@ img {
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    /* Changed from 100% to auto */
+    display: block;
+    object-fit: contain;
     animation: none;
     /* Reset global image animation */
     opacity: 1;
