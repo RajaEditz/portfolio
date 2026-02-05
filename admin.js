@@ -109,6 +109,7 @@ const DEFAULT_PROJECTS = [
         tools: 'Adobe Photoshop, Illustrator',
         outcome: 'The posters were widely shared on social media and used for local physical distribution, leading to increased customer walk-ins during the festival season.',
         gallery: [
+            'assets/projects/poster-thumb.jpg',
             'assets/projects/pongal-graphixpert.png',
             'assets/projects/pongal-nms.png',
             'assets/projects/pongal-bysul-store.jpg',
